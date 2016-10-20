@@ -2,6 +2,9 @@ package edu.technopolis.homework;
 
 class Matrix implements Cloneable {
     private long[][] buffer;
+    private boolean checkRange(int a, int b) {
+        return (a >= 0 && a < height()) && (b >= 0 && b < width());
+    }
 
     public Matrix(int[][] matrix) {
         long[][] tmp = new long[matrix.length][matrix[0].length];
@@ -53,9 +56,5 @@ class Matrix implements Cloneable {
             }
             System.out.println();
         }
-    }
-
-    private boolean checkRange(int a, int b) {
-        return (a >= 0 && a < height()) && (b >= 0 && b < width());
     }
 }
