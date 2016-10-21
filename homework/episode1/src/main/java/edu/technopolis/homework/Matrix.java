@@ -39,6 +39,9 @@ class Matrix implements Cloneable {
         }
     }
     public Matrix multiplyTo(Matrix that) {
+        if (this.width() != that.height()) {
+            return null;
+        }
         long[][] resultArray = new long[this.height()][that.width()];
         for (int i = 0; i != this.height(); ++i) {
             for (int j = 0; j != that.width(); ++j) {
@@ -52,7 +55,7 @@ class Matrix implements Cloneable {
     public void printMatrix() {
         for (int i = 0; i != this.height(); ++i) {
             for (int j = 0; j != this.width(); ++j) {
-                System.out.print(this.elementAt(i, j) + " ");
+                System.out.print(String.format("%d ", this.elementAt(i, j)));
             }
             System.out.println();
         }
