@@ -17,23 +17,34 @@ public class MatrixMultiplication {
     private static void parse(String... args) {
         int n, m, x, y;
         if (args.length < 4) {
-            throw new IllegalArgumentException("Wrong quantity of args has been set");
+            System.out.println("Формат ввода: N M X Y A_1_1 ... A_N_M B_1_1 ... B_X_Y\n" +
+            "где N и M - размерность первой матрицы A (количество строк и столбцов), \n" +
+                    "A_1_1 ... A_N_M - элементы матрицы A, X и Y - размерность второй матрицы B, \n" +
+                    "B_1_1 ... B_X_Y - элементы матрицы B. \n" +
+                    "Например, для умножения единичной матрицы размером 2 на 2 на вектор (-1, -1) \n" +
+                    "необходимо на вход приложению подать следующие аргументы:\n" +
+                    "\t2 2 2 1 1 0 0 1 -1 -1\n" +
+                    "В консоль должен распечататься вектор:\n" +
+                    "\t-1\n\t-1\n");
         }
         for (int i = 0; i != 4; ++i) {
             if (Integer.parseInt(args[i]) < 1) {
-                throw new IllegalArgumentException("Some dimensions are non-positive");
+                System.out.println("Some dimensions are non-positive");
+                System.exit(1);
             }
         }
         n = Integer.parseInt(args[0]);
         m = Integer.parseInt(args[1]);
         x = Integer.parseInt(args[2]);
         if (x != m) {
-            throw new IllegalArgumentException("Dimensions are not consistent");
+            System.out.println("Dimensions are not consistent");
+            System.exit(1);
         }
         y = Integer.parseInt(args[3]);
 
         if (args.length < 4 + n * m + x * y) {
-            throw new IllegalArgumentException("Wrong arguments length");
+            System.out.println("Wrong arguments length");
+            System.exit(1);
         }
 
         int cnt = 3;
@@ -53,19 +64,15 @@ public class MatrixMultiplication {
     }
 
     public static void main(String... args) {
-        try {
-            parse(args);
-        } catch (RuntimeException e) {
-            System.err.println("Exception raised while parsing");
-            throw e;
-        }
+        parse(args);
         Matrix firstMatrix = new Matrix(firstArray);
         Matrix secondMatrix = new Matrix(secondArray);
         Matrix resultMatrix = firstMatrix.multiplyTo(secondMatrix);
         if (resultMatrix != null) {
             resultMatrix.printMatrix();
         } else {
-            throw new RuntimeException("Exception raised while multiplication");
+            System.out.println("Error while multiplication");
+            System.exit(1);
         }
     }
 }
