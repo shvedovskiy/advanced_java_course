@@ -78,6 +78,7 @@ public abstract class Pokemon {
         if (power >= repulse.getPower()) {
             if (repulse.getAbsorption() >= damage) {
                 power -= repulse.getPower();
+                punch(damage / 4);
                 return getPower();
             }
             else {

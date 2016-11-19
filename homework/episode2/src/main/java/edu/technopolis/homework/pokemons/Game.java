@@ -10,7 +10,7 @@ public class Game {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Formatter f = new Formatter(System.out);
         String input;
-        Pokemon pokemon = null;
+        Pokemon pokemon;
         Trainer trainer = null;
 
         System.out.println("Выберите покемона для тренера: " + number);
@@ -204,6 +204,7 @@ public class Game {
                     } else {
                         relax(trainer_2);
                     }
+                    System.out.println("Готово!");
                     break;
 
                 case "5":
