@@ -48,7 +48,7 @@ public class LFU<K, V> implements Map<K, V> {
         LFUEntry<K, V> curr = cache.get(key);
         if (curr == null) {
             if (cache.size() == maxSize) {
-                eviction();
+                grow();
             }
             LinkedHashSet<LFUEntry<K, V>> nodes = freqs[0];
             curr = new LFUEntry<>(key, value, 0);
@@ -155,7 +155,7 @@ public class LFU<K, V> implements Map<K, V> {
     }
 
     @SuppressWarnings("unchecked")
-    private void eviction() {
+    private void grow() {
         int currDeleted = 0;
         float target = maxSize * loadFactor;
         while (currDeleted < target) {
